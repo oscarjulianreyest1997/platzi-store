@@ -1,0 +1,45 @@
+use("platzi_store") 
+
+db.getCollectionInfos() //Nos muestra los esquemas actuales
+
+//Vamos a acutalizar una coleccion
+//En este caso esta restringido crear campos nuevos en la coleccion de users
+//Para eso hay que enviarle toda la validacion de la coleccion
+//Primero debemos dar permisos de administrador a la coleccion
+
+db.runCommand({ //Actualizar
+    collMod: 'users', //El esquema a actualizar
+    validator: {  //Enviar la validación
+        $jsonSchema: { 
+            bsonType: 'object', 
+            required: ['email', 'password', 'role'],
+            additionalProperties: true, //Modificación
+            properties: { 
+                name: { 
+                    bsonType: 'string' 
+                },
+                last_name: { 
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string' 
+                },
+                password: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-z0-9]{8,}$"
+                },
+                age: { 
+                    bsonType: 'number', 
+                    minimum: 18, 
+                    maximum: 99 
+                },
+                isSingle: { 
+                    bsonType: 'bool' 
+                },
+                role: { 
+                    enum: ['customer', 'saller', 'admin']
+                }
+            }
+        }
+    }
+})

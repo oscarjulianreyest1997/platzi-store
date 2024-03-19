@@ -1,0 +1,4 @@
+use("platzi_store") //Si no está creada se creará
+
+db.users.find()
+

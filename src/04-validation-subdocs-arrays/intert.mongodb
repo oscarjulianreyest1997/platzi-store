@@ -1,0 +1,13 @@
+use("platzi_store")
+
+db.products.insertOne({
+    name: 'Camiseta',
+    // sizes: ['L', 'M'] //Validemos ahora que no permita el mismo string en el array
+    // sizes: [] //Error dado que no permite el array vacio
+    // sizes: ['L', 'XL', 'L'] //Error dado que no permite valores duplicados en el array
+    sizes: ['L', 'XL'],
+    category: {
+        name: 'category',
+        image: 'uerl'
+    }
+})

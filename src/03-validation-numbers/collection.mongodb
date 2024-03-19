@@ -1,0 +1,36 @@
+use("platzi_store") 
+
+db.createCollection('users', { 
+    validator: { 
+        $jsonSchema: { 
+            bsonType: 'object', 
+            required: ['email', 'password', 'role'],
+            properties: { 
+                name: { 
+                    bsonType: 'string' 
+                },
+                last_name: { 
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string' 
+                },
+                password: { 
+                    bsonType: 'string' 
+                },
+                age: { //Campo edad
+                    bsonType: 'number', //Tipo de dato number
+                    minimum: 18, //restriccion de la edad minima
+                    maximum: 99 //restriccion de la edad maxima
+                },
+                isSingle: { //Campo soltero o no
+                    bsonType: 'bool' //Tipo de dato booleano
+                },
+                role: { //Campo rol
+                    //Usamos enum para listar los unicos roles aceptados a la bd
+                    enum: ['customer', 'saller', 'admin']
+                }
+            }
+        }
+    }
+})

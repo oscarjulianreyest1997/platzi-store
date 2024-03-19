@@ -1,0 +1,40 @@
+use("platzi_store") 
+
+db.createCollection('users', { 
+    validator: { 
+        $jsonSchema: { 
+            bsonType: 'object', 
+            required: ['email', 'password', 'role'],
+            properties: { 
+                name: { 
+                    bsonType: 'string' 
+                },
+                last_name: { 
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string' 
+                },
+                password: { //Modificamos el campo password especificando el tipo de datos que acepta el password asi como el tamaño
+                    bsonType: 'string', //tipo string
+                    pattern: "^[A-Za-z0-9]{8,}$"
+                    //Expresion regular donde nos dice:
+                    //1. Puede contener letras de la A-Z en mayusculas
+                    //2. Puede contener letras de la a-z en minusculas
+                    //3. Tiene que ser minimo de 8 caracteres y maximo no hay
+                },
+                age: { 
+                    bsonType: 'number', 
+                    minimum: 18, 
+                    maximum: 99 
+                },
+                isSingle: { 
+                    bsonType: 'bool' 
+                },
+                role: { 
+                    enum: ['customer', 'saller', 'admin']
+                }
+            }
+        }
+    }
+})
