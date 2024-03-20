@@ -1,0 +1,6 @@
+use("platzi_store") //Si no está creada se creará
+
+db.users.find()
+db.orders.find({
+    "items.qty": 3
+})

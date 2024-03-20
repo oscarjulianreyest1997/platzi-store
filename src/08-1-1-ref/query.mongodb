@@ -1,0 +1,24 @@
+use("platzi_store") //Si no está creada se creará
+
+db.stores.findOne({
+    storeId: "ST001"
+})
+
+
+db.stores_details.findOne({
+    storeId: "ST001"
+})
+
+
+db.stores.aggregate([ //De la coleccion stores vamos a desplegar la relacion
+    {
+        $lookup: {
+          from: 'stores_details', //A que coleccion va a hacer referencia
+          localField: 'storeId', //Campo de relacion de la tabla origen
+          foreignField: 'storeId', ////Campo de relacion de la tabla destino
+          as: 'detail' //Donde dejar la relación - le colocamos el nombre
+        }
+    }
+])
+
+

@@ -1,0 +1,53 @@
+use("platzi_store") //Si no está creada se creará
+
+db.orders.find()
+
+db.orders.find({ user_id: ObjectId('65fa08856d92df667bc81c0f')}).count()
+//Cantidad de ordenes del usuario con ese id
+
+db.orders.find({ user_id: ObjectId('65fa084ad69627b65e53d045')})
+
+//Traer la informacion de ese usuario de una forma poco practica
+db.orders.findOne({user_id: ObjectId('65fa084ad69627b65e53d045')})
+
+
+
+db.orders.aggregate([ //Coleccion origen
+    { //Si necesitamos consultar solo 1 orden de compra y no todas usamos $match
+        $match: {
+          _id: ObjectId('65fa0d75e165561db190e7e7')//Id de la orden
+        }
+    },
+    {
+        $lookup: {
+          from: 'users',//Coleccion destino
+          localField: 'user_id', //Campo en la coleccion origen
+          foreignField: '_id', //Campo en la coleccion destino
+          as: 'user' //Nombre de la conexion
+        }
+    }
+])
+
+
+//------------------------------------RETO----------------------------
+//Traer las ordenes de compra de un usuario
+db.users.aggregate([ //Coleccion origen
+    { //Si necesitamos consultar solo 1 orden de compra y no todas usamos $match
+        $match: {
+          _id: ObjectId('65fa084ad69627b65e53d045')//Id de la orden
+        }
+    },
+    {
+        $lookup: {
+          from: 'orders',//Coleccion destino
+          localField: '_id', //Campo en la coleccion origen
+          foreignField: 'user_id', //Campo en la coleccion destino
+          as: 'order' //Nombre de la conexion
+        }
+    }
+])
+
+
+
+
+
