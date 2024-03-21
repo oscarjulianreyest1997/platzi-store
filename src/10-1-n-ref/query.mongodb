@@ -34,7 +34,7 @@ db.orders.aggregate([ //Coleccion origen
 db.users.aggregate([ //Coleccion origen
     { //Si necesitamos consultar solo 1 orden de compra y no todas usamos $match
         $match: {
-          _id: ObjectId('65fa084ad69627b65e53d045')//Id de la orden
+          _id: ObjectId('65fa084ad69627b65e53d045')//Id del usuario
         }
     },
     {
@@ -46,7 +46,6 @@ db.users.aggregate([ //Coleccion origen
         }
     }
 ])
-
 
 
 

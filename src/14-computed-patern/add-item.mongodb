@@ -1,0 +1,22 @@
+use("platzi_store")
+
+//65fb7306bdf0bcec2ddeb042 referencia orden de compra
+
+//Recordemos que se creo un nuevo campo a una orden llamado total para que se actualice dinamicamente
+
+db.orders.updateOne(
+    {_id: ObjectId('65fb7306bdf0bcec2ddeb042')},
+    {
+        $push: { //Agregar elementos o agregar elementos al campo items que es un array
+            items: { //Agregamos el producto simulando el click del usuario a un producto
+                    name: 'Producto 2',
+                    price: 45,
+                    qty: 3,
+                    product_id: ObjectId('65fb64b486936030bb0f7208')
+            }
+        },
+        $inc: { //Actualizando el precio de la orden de compra usando el incremento o $inc
+            total: 45 * 3
+        }
+    }
+)

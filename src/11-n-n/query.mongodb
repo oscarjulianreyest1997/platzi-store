@@ -1,0 +1,21 @@
+use("platzi_store") //Si no está creada se creará
+
+db.products.find()
+
+db.stores.find()
+
+//Como ver no solo los id de los productos de cada tienda sino sus descripciones y precios:
+db.stores.aggregate([
+  {
+    $lookup: {
+      from: 'products', //Coleccion a la cual se desea unir
+      localField: 'products_ids', //Campo que en forma de vector tiene las referencia
+      foreignField: '_id', //Campo de relacion (id de los productos)
+      as: 'products'//Nombre de la relación
+    }
+
+  }
+])
+
+
+

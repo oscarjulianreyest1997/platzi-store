@@ -1,0 +1,14 @@
+use("platzi_store") //Si no está creada se creará
+
+db.products.update(
+    {_id: ObjectId('65fb64b486936030bb0f7207')}, //_id del producto
+    {
+        //Modificar el producto $set
+        $set: {
+            stores_ids: [
+                ObjectId('65fb65f771acee943632c3a0') 
+                //Acualizamos o agregamos el campo que contiene la relacion a la store 2 a traves del id
+            ]
+        }
+    }
+    )

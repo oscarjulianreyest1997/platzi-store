@@ -1,0 +1,9 @@
+use("platzi_store") //Si no está creada se creará
+
+db.products.find()
+
+db.orders.findOne({_id: ObjectId('65fb713a5f1676f93f5aabca')})
+
+
+
+

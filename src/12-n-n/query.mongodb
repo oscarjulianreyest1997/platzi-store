@@ -1,0 +1,26 @@
+use("platzi_store") //Si no está creada se creará
+
+db.products.find()
+//Producto 1 (id): 65fb64b486936030bb0f7207
+db.stores.find()
+//Store 2 (id): 65fb65f771acee943632c3a0
+
+
+//Mostrar la descripcion de la store asociada al producto
+db.products.aggregate([
+  {
+    $lookup: {
+      from: 'stores', //Coleccion a la cual se desea unir
+      localField: 'stores_ids', //Campo que en forma de vector tiene las referencia
+      foreignField: '_id', //Campo de relacion (id de las stores)
+      as: 'stores'//Nombre de la relación
+    }
+
+  }
+])
+
+
+
+
+
+
